@@ -23,13 +23,8 @@
                 <configuration>
                     <parallel>methods</parallel>
                     <useUnlimitedThreads>true</useUnlimitedThreads>
-                    <!--<threadCount>3</threadCount>
-                    <forkCount>1</forkCount>
-                    <reuseForks>true</reuseForks>
-                    <perCoreThreadCount>false</perCoreThreadCount>-->
                     <testFailureIgnore>true</testFailureIgnore>
                     <runOrder>Alphabetical</runOrder>
-                    <!--<rerunFailingTestsCount>1</rerunFailingTestsCount>-->
                     <includes>
                         <include>**/*CukesRunner.java</include>
                         <include>**/*FailedTestRunner.java</include>
@@ -49,10 +44,10 @@
                         </goals>
                         <configuration>
                             <projectName>Cucumber HTML Reports</projectName>
-                            <outputDirectory>${project.build.directory}</outputDirectory>
-                            <inputDirectory>${project.build.directory}</inputDirectory>
+                            <outputDirectory>${project.build.directory}/cucumber-reports</outputDirectory>
+                            <inputDirectory>${project.build.directory}/cucumber-reports</inputDirectory>
                             <jsonFiles>
-                                <param>**/cucumber*.json</param>
+                                <param>cucumber*.json</param>
                             </jsonFiles>
                         </configuration>
                     </execution>
@@ -60,6 +55,7 @@
             </plugin>
         </plugins>
     </build>
+
 
     <dependencies>
         <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
