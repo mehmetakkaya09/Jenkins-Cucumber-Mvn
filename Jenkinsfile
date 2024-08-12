@@ -21,7 +21,7 @@ pipeline {
     stages {
         stage('Initialize') {
             steps {
-                bat '''
+                sh '''
                     echo "PATH = ${PATH}"
                     echo "M2_HOME = ${M2_HOME}"
                 '''
@@ -29,7 +29,7 @@ pipeline {
         }
         stage('Build') {
             steps {
-                bat "mvn -f pom.xml -B -DskipTests clean package"
+                sh "mvn -f pom.xml -B -DskipTests clean package"
             }
             post {
                 success {
@@ -40,20 +40,20 @@ pipeline {
         }
         stage('Test') {
             steps {
-                bat "mvn -f pom.xml test"
-                bat "mvn clean verify -Dcucumber.filter.tags='$params.TagName' -DfailIfNoTests=false"
+                sh "mvn -f pom.xml test"
+                sh "mvn clean verify -Dcucumber.filter.tags='$params.TagName' -DfailIfNoTests=false"
             }
 //             post {
 //                 always {
-//                     cucumber 'target/cucumber-reports/cucumber.json'
+//                     junit 'Cucumber-Mvn-Project/target/surefire-reports/*.xml'
+//                     html 'target/cucumber-report.html'
 //                 }
 //             }
-
         }
         stage('Cucumber Report') {
             steps {
                 cucumber buildStatus: "UNSTABLE",
-                    fileIncludePattern: "**/*.json",
+                    fileIncludePattern: "**/cucumber.json",
                     jsonReportDirectory: "target"
             }
         }
