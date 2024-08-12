@@ -83,14 +83,14 @@
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-java</artifactId>
-            <version>7.11.0</version>
+            <version>7.2.3</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-junit -->
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-junit</artifactId>
-            <version>7.11.0</version>
+            <version>7.2.3</version>
             <scope>test</scope>
         </dependency>
 
@@ -98,7 +98,7 @@
         <dependency>
             <groupId>me.jvt.cucumber</groupId>
             <artifactId>reporting-plugin</artifactId>
-            <version>7.11.0</version>
+            <version>7.2.0</version>
         </dependency>
 
 
