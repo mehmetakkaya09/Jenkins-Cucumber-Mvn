@@ -19,16 +19,38 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.0.0-M5</version>
+                <version>3.0.0</version>
                 <configuration>
-                    <parallel>methods</parallel>
-                    <useUnlimitedThreads>true</useUnlimitedThreads>
-                    <!--                    <threadCount>4</threadCount>-->
                     <testFailureIgnore>true</testFailureIgnore>
+                    <runOrder>Alphabetical</runOrder>
                     <includes>
-                        <include>**/CukesRunner*.java</include>
+                        <include>**/*CukesRunner.java</include>
                     </includes>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>net.masterthought</groupId>
+                <artifactId>maven-cucumber-reporting</artifactId>
+                <version>5.7.0</version>
+                <executions>
+                    <execution>
+                        <id>generate-cucumber-reports</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <projectName>Cucumber HTML Reports</projectName>
+                            <!-- Output: Raporun yazılacağı klasör -->
+                            <outputDirectory>${project.build.directory}/cucumber-html-reports</outputDirectory>
+
+                            <!-- Input: Cucumber'ın ürettiği JSON dosyası -->
+                            <jsonFiles>
+                                <param>${project.build.directory}/cucumber-reports/cucumber.json</param>
+                            </jsonFiles>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
