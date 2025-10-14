@@ -41,10 +41,8 @@
                         </goals>
                         <configuration>
                             <projectName>Cucumber HTML Reports</projectName>
-                            <!-- Output: Raporun yazılacağı klasör -->
                             <outputDirectory>${project.build.directory}/cucumber-html-reports</outputDirectory>
-
-                            <!-- Input: Cucumber'ın ürettiği JSON dosyası -->
+                            <inputDirectory>${project.build.directory}/cucumber-reports</inputDirectory>
                             <jsonFiles>
                                 <param>${project.build.directory}/cucumber-reports/cucumber.json</param>
                             </jsonFiles>

@@ -118,6 +118,10 @@ pipeline {
                     cucumber fileIncludePattern: "**/cucumber.json", jsonReportDirectory: "target/cucumber-reports"
 
                     echo "Publishing HTML report..."
+                                        script {
+                                            def reportDir = "target/cucumber-html-reports"
+                                            bat "if not exist ${reportDir} mkdir ${reportDir}"  // 👈 Klasör yoksa oluştur
+                                        }
                     publishHTML([
                         allowMissing: true,
                         alwaysLinkToLastBuild: true,
