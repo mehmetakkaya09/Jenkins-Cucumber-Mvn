@@ -1,3 +1,65 @@
+// pipeline {
+//     agent any
+//     tools {
+//         maven 'MAVEN'
+//         jdk 'JDK'
+//     }
+//     options {
+//         timestamps ()
+//         ansiColor('gnome-terminal')
+//         buildDiscarder(logRotator(numToKeepStr: '10'))
+//     }
+//
+//     triggers {
+//         cron('0 6 * * 1-5')
+//     }
+//
+//     parameters {
+//         string(name: 'TagName', defaultValue: "@employee", description: 'Scenario Tag to be run')
+//     }
+//
+//     stages {
+//         stage('Initialize') {
+//             steps {
+//                 bat '''
+//                     echo "PATH = ${PATH}"
+//                     echo "M2_HOME = ${M2_HOME}"
+//                 '''
+//             }
+//         }
+//         stage('Build') {
+//             steps {
+//                 bat "mvn -f pom.xml -B -DskipTests clean package"
+//             }
+//             post {
+//                 success {
+// //                     echo "Now Archiving the Artifacts....."
+//                     archiveArtifacts artifacts: '**/*.jar'
+//                 }
+//             }
+//         }
+//         stage('Test') {
+//             steps {
+//                 bat "mvn -f pom.xml test"
+//                 bat "mvn clean verify -Dcucumber.filter.tags='$params.TagName' -DfailIfNoTests=false"
+//             }
+//             post {
+//                 always {
+//         cucumber fileIncludePattern: "**/cucumber.json", jsonReportDirectory: "target/cucumber-reports"
+//                 }
+//             }
+//
+//         }
+// //         stage('Cucumber Report') {
+// //             steps {
+// //                 cucumber buildStatus: "UNSTABLE",
+// //                     fileIncludePattern: "**/cucumber.json",
+// //                     jsonReportDirectory: "target"
+// //             }
+// //         }
+//     }
+// }
+
 pipeline {
     agent any
 
@@ -52,10 +114,10 @@ pipeline {
 
             post {
                 always {
-                    echo "🧾 Publishing Cucumber JSON Report..."
+                    echo " Publishing Cucumber JSON Report..."
                     cucumber fileIncludePattern: "**/cucumber.json", jsonReportDirectory: "target/cucumber-reports"
 
-                    echo "📊 Publishing HTML report..."
+                    echo "Publishing HTML report..."
                     publishHTML([
                         allowMissing: true,
                         alwaysLinkToLastBuild: true,
@@ -75,10 +137,10 @@ pipeline {
             cleanWs()
         }
         failure {
-            echo "❌ Pipeline failed."
+            echo " Pipeline failed."
         }
         success {
-            echo "✅ Pipeline completed successfully!"
+            echo " Pipeline completed successfully!"
         }
     }
 }
