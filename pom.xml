@@ -46,6 +46,7 @@
                             <jsonFiles>
                                 <param>${project.build.directory}/cucumber-reports/cucumber.json</param>
                             </jsonFiles>
+                            <failOnMissingJsonFile>false</failOnMissingJsonFile>  <!-- JSON yoksa fail etme -->
                         </configuration>
                     </execution>
                 </executions>
