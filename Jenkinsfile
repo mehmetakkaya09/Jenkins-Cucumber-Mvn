@@ -109,6 +109,7 @@ pipeline {
         stage('Test Execution') {
             steps {
                 // Testleri ve Cucumber raporunu çalıştır
+                bat "mvn -f pom.xml test"
                 bat "mvn clean verify -Dcucumber.filter.tags=${params.TagName} -DfailIfNoTests=false"
             }
 
@@ -120,7 +121,7 @@ pipeline {
                     echo "Publishing HTML report..."
                                         script {
                                             def reportDir = "target/cucumber-html-reports"
-                                            bat "if not exist ${reportDir} mkdir ${reportDir}"  // 👈 Klasör yoksa oluştur
+                                            bat "if not exist ${reportDir} mkdir ${reportDir}"  // Klasör yoksa oluştur
                                         }
                     publishHTML([
                         allowMissing: true,
